@@ -21,6 +21,16 @@ app.get('/repositories/:repoId', (req, res) => {
   repositoryController.getRepositoryById(req, res);
 });
 
+// Middleware de tratamento de erros personalizado
+app.use((err, req, res, next) => {
+  if (err && err.details && err.details.length > 0) {
+    const errorMessage = err.details[0].message;
+    res.status(400).json({ mensagem: errorMessage });
+  } else {
+    next(err);
+  }
+});
+
 // Rota para a documentação Swagger
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 

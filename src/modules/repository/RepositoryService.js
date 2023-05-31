@@ -10,13 +10,19 @@ class RepositoryService {
 
     const paginatedRepositories = filteredRepositories.slice(startIndex, startIndex + perPage);
 
-    return paginatedRepositories;
+    const repositoriesData = paginatedRepositories.map(repository => {
+      return {
+        id: repository.id,
+        nome: repository.name,
+        descricao: repository.description
+      };
+    });
+
+    return repositoriesData;
   }
 
   getRepositoryById(id) {
-
     const repository = this.repositoryRepository.findById(id);
-
     return repository;
   }
 }
