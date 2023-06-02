@@ -14,7 +14,6 @@ class RepositoryService {
       return {
         id: repository.id,
         nome: repository.name,
-        descricao: repository.description
       };
     });
 
